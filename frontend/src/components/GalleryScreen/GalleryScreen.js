@@ -23,8 +23,7 @@ const GalleryScreen = () => {
                 fluid
               ></Card.Img>
               <Card.Body>
-                <div> Name</div>
-                <div>Price</div>
+                <Card.Title className='price'>$100</Card.Title>
               </Card.Body>
             </Card>
           </Col>
@@ -37,8 +36,7 @@ const GalleryScreen = () => {
                 fluid
               ></Card.Img>
               <Card.Body>
-                <div> Name</div>
-                <div>Price</div>
+                <Card.Title className='price'>$100</Card.Title>
               </Card.Body>
             </Card>
           </Col>
@@ -51,8 +49,7 @@ const GalleryScreen = () => {
                 fluid
               ></Card.Img>
               <Card.Body>
-                <div> Name</div>
-                <div>Price</div>
+                <Card.Title className='price'>$100</Card.Title>
               </Card.Body>
             </Card>
           </Col>
@@ -71,8 +68,7 @@ const GalleryScreen = () => {
                 fluid
               ></Card.Img>
               <Card.Body>
-                <div> Name</div>
-                <div>Price</div>
+                <Card.Title className='price'>$100</Card.Title>
               </Card.Body>
             </Card>
           </Col>
@@ -85,8 +81,7 @@ const GalleryScreen = () => {
                 fluid
               ></Card.Img>
               <Card.Body>
-                <div> Name</div>
-                <div>Price</div>
+                <Card.Title className='price'>$100</Card.Title>
               </Card.Body>
             </Card>
           </Col>
@@ -99,8 +94,7 @@ const GalleryScreen = () => {
                 fluid
               ></Card.Img>
               <Card.Body>
-                <div> Name</div>
-                <div>Price</div>
+                <Card.Title className='price'>$100</Card.Title>
               </Card.Body>
             </Card>
           </Col>

@@ -1,6 +1,11 @@
 .imageSize {
   width: 250px !important;
+  margin-left: auto;
+  margin-right: auto;
 }
 .mainBlock {
   margin: 30px;
+}
+.price {
+  text-align: center;
 }

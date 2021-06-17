@@ -1,6 +1,7 @@
 import React from "react"
 import { Image } from "react-bootstrap"
 import mainI from "../../images/me1.png"
+import "./BioScreen.css"
 
 const BioScreen = () => {
   return (
