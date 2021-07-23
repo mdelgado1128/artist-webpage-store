@@ -1,31 +1,56 @@
-import express from "express"
+import mongoose from "mongoose"
 import dotenv from "dotenv"
-import connectDB from "./config/db.js"
 import colors from "colors"
-import { notFound, errorHandler } from "./middleware/errorMiddleware.js"
-
-import productRoutes from "./routes/productRoutes.js"
+import users from "./data/users.js"
+import products from "./data/products.js"
+import Order from "./models/orderModel.js"
+import connectDB from "./config/db.js"
+import User from "./models/userModel.js"
+import Product from "./models/productModels.js"
 
 dotenv.config()
+
 connectDB()
 
-const app = express()
-app.get("/", (req, res) => {
-  res.send("Api is running")
-})
+const importData = async () => {
+  try {
+    await Order.deleteMany()
+    await Product.deleteMany()
+    await User.deleteMany()
 
-app.use("/api/products", productRoutes)
+    const createdUsers = await User.insertMany(users)
+    const adminUser = createdUsers[0]._id
 
-app.use(notFound)
+    const sampleProducts = products.map((product) => {
+      return { ...product, user: adminUser }
+    })
 
-app.use(errorHandler)
+    await Product.insertMany(sampleProducts)
 
-const PORT = process.env.PORT || 5000
+    console.log("Data Imported!".green.inverse)
+    process.exit()
+  } catch (error) {
+    console.error(`${error}`.red.inverse)
+    process.exit(1)
+  }
+}
 
-app.listen(
-  PORT,
-  console.log(
-    `Server runnig on port ${process.env.NODE_ENV} mode on port ${PORT}`.yellow
-      .bold
-  )
-)
+const destroyData = async () => {
+  try {
+    await Order.deleteMany()
+    await Product.deleteMany()
+    await User.deleteMany()
+
+    console.log("Data Destroyed!".red.inverse)
+    process.exit()
+  } catch (error) {
+    console.error(`${error}`.red.inverse)
+    process.exit(1)
+  }
+}
+
+if (process.argv[2] === "-d") {
+  destroyData()
+} else {
+  importData()
+}

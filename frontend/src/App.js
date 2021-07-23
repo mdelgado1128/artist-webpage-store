@@ -1,11 +1,11 @@
 import "./App.css"
-import MainScreen from "./components/MainScreen/MainScreen"
+import MainScreen from "./screens/MainScreen/MainScreen"
 import Header from "./components/Header"
 import { Container } from "react-bootstrap"
 import { BrowserRouter as Router, Route } from "react-router-dom"
 import Footer from "./components/Footer.js"
-import GalleryScreen from "./components/GalleryScreen/GalleryScreen"
-import BioScreen from "./components/BioScreen/BioScreen"
+import GalleryScreen from "./screens/GalleryScreen/GalleryScreen"
+import BioScreen from "./screens/BioScreen/BioScreen"
 import Gallery from "./components/Gallery/Gallery.js"
 
 function App() {
