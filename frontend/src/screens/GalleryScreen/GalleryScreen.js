@@ -1,105 +1,117 @@
-import React from "react"
-import { Row, Col, Card, Container } from "react-bootstrap"
-import painting1 from "../../images/pic-1.jpg"
-import painting2 from "../../images/pic-2.jpg"
-import painting3 from "../../images/pic-3.jpg"
-import painting4 from "../../images/pic-4.jpg"
-import painting5 from "../../images/pic-5.jpg"
-import painting7 from "../../images/pic-7.jpg"
+import React, { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
+import { Row, Col, Image, ListGroup, Card, Button, Form } from "react-bootstrap"
+import Loader from "../../components/Loader"
+import Message from "../../components/Message"
 import "./GalleryScreen.css"
+import { useDispatch, useSelector } from "react-redux"
+import { listProductsDetails } from "../../actions/productActions"
 
-const GalleryScreen = () => {
+const GalleryScreen = ({ history, match }) => {
+  const [qty, setQty] = useState(1)
+  const dispatch = useDispatch()
+
+  const productDetails = useSelector((state) => state.productDetails)
+  const { loading, error, product } = productDetails
+
+  useEffect(() => {
+    dispatch(listProductsDetails(match.params.id))
+  }, [dispatch, match])
+
+  const addToCartHandler = () => {
+    history.push(`/cart/${match.params.id} ? qty=${qty}`)
+  }
+
   return (
     <div>
-      <Container className='mainBlock'>
-        <Row>
-          <Col>
-            <Card style={{ width: "18rem" }}>
-              <Card.Img
-                className='imageSize'
-                variant='top'
-                src={painting1}
-                alt='mark'
-                fluid
-              ></Card.Img>
-              <Card.Body>
-                <Card.Title className='price'>$100</Card.Title>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col>
-            <Card style={{ width: "18rem" }}>
-              <Card.Img
-                className='imageSize img-fluid'
-                src={painting2}
-                alt='mark'
-                fluid
-              ></Card.Img>
-              <Card.Body>
-                <Card.Title className='price'>$100</Card.Title>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col>
-            <Card style={{ width: "18rem" }}>
-              <Card.Img
-                className='imageSize img-fluid'
-                src={painting3}
-                alt='mark'
-                fluid
-              ></Card.Img>
-              <Card.Body>
-                <Card.Title className='price'>$100</Card.Title>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
+      <>
+        <Link className='btn btn-light my-3' to='/'>
+          Go Back
+        </Link>
+        {loading ? (
+          <Loader />
+        ) : error ? (
+          <Message variant='danger'>{error}</Message>
+        ) : (
+          <Row>
+            <Col md={6}>
+              <Image src={product.image} alt={product.name} fluid />
+            </Col>
+            <Col md={3}>
+              <ListGroup variant='flush'>
+                <ListGroup.Item>
+                  <h3>{product.name}</h3>
+                </ListGroup.Item>
+                <ListGroup.Item>Price: ${product.price}</ListGroup.Item>
+                <ListGroup.Item>
+                  Description: {product.description}
+                </ListGroup.Item>
+                <ListGroup.Item>Category: {product.category}</ListGroup.Item>
+              </ListGroup>
+            </Col>
+            <Col md={3}>
+              <Card>
+                <ListGroup variant='flush'>
+                  <ListGroup.Item>
+                    <Row>
+                      <Col>Price:</Col>
+                      <Col>
+                        <strong>${product.price}</strong>
+                      </Col>
+                    </Row>
+                  </ListGroup.Item>
+                  <ListGroup variant='flush'>
+                    <ListGroup.Item>
+                      <Row>
+                        <Col>Status:</Col>
+                        <Col>
+                          {product.countInStock > 0
+                            ? "In Stock"
+                            : "Out of Stock"}
+                        </Col>
+                      </Row>
+                    </ListGroup.Item>
 
-      <Container className='mainBlock'>
-        <Row>
-          <Col>
-            <Card style={{ width: "18rem" }}>
-              <Card.Img
-                className='imageSize'
-                variant='top'
-                src={painting4}
-                alt='mark'
-                fluid
-              ></Card.Img>
-              <Card.Body>
-                <Card.Title className='price'>$100</Card.Title>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col>
-            <Card style={{ width: "18rem" }}>
-              <Card.Img
-                className='imageSize img-fluid'
-                src={painting5}
-                alt='mark'
-                fluid
-              ></Card.Img>
-              <Card.Body>
-                <Card.Title className='price'>$100</Card.Title>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col>
-            <Card style={{ width: "18rem" }}>
-              <Card.Img
-                className='imageSize img-fluid'
-                src={painting7}
-                alt='mark'
-                fluid
-              ></Card.Img>
-              <Card.Body>
-                <Card.Title className='price'>$100</Card.Title>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
+                    {product.countInStock > 0 && (
+                      <ListGroup.Item>
+                        <Row>
+                          <Col>Qty</Col>
+                          <Col>
+                            <Form.Control
+                              as='select'
+                              value={qty}
+                              onChange={(e) => setQty(e.target.value)}
+                            >
+                              {[...Array(product.countInStock).keys()].map(
+                                (x) => (
+                                  <option key={x + 1} value={x + 1}>
+                                    {x + 1}
+                                  </option>
+                                )
+                              )}
+                            </Form.Control>
+                          </Col>
+                        </Row>
+                      </ListGroup.Item>
+                    )}
+
+                    <ListGroup.Item>
+                      <Button
+                        onClick={addToCartHandler}
+                        className='btn-block'
+                        type='button'
+                        disabled={product.countInStock === 0}
+                      >
+                        Add to Cart
+                      </Button>
+                    </ListGroup.Item>
+                  </ListGroup>
+                </ListGroup>
+              </Card>
+            </Col>
+          </Row>
+        )}
+      </>
     </div>
   )
 }

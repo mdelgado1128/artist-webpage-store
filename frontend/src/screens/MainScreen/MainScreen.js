@@ -1,28 +1,12 @@
-// import React from "react"
-// // import "./MainScreen.css"
-// import GalleryScreen from "../GalleryScreen/GalleryScreen"
-
-// const MainScreen = () => {
-//   return (
-//     <div>
-//       <div class='main'>
-//         <GalleryScreen />
-//       </div>
-//     </div>
-//   )
-// }
-
-// export default MainScreen
-
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import Message from "../components/Message"
-import Loader from "../components/Loader"
-import Product from "../components/Product"
+import Message from "../../components/Message"
+import Loader from "../../components/Loader"
+import Product from "../../components/Product"
 import { Row, Col } from "react-bootstrap"
-import { listProducts } from "../actions/productActions"
+import { listProducts } from "../../actions/productActions"
 
-const HomeScreen = () => {
+const MainScreen = () => {
   const dispatch = useDispatch()
 
   const productList = useSelector((state) => state.productList)
@@ -34,7 +18,7 @@ const HomeScreen = () => {
 
   return (
     <>
-      <h1>Latest Products</h1>
+      <h1>Latest Art</h1>
       {loading ? (
         <Loader />
       ) : error ? (
@@ -52,4 +36,4 @@ const HomeScreen = () => {
   )
 }
 
-export default HomeScreen
+export default MainScreen

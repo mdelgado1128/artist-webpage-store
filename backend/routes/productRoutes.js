@@ -2,7 +2,7 @@ import express from "express"
 import asyncHandler from "express-async-handler"
 
 const router = express.Router()
-import Product from "../models/productModel.js"
+import Product from "../models/productModels.js"
 
 //**@desc Fetch all prodcuts
 //**@route Get /api/products
@@ -14,6 +14,7 @@ router.get(
     const products = await Product.find({})
 
     res.json(products)
+    console.log(products)
   })
 )
 
