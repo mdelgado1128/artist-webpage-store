@@ -2,18 +2,18 @@ import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import Message from "../../components/Message"
 import Loader from "../../components/Loader"
-import Product from "../../components/Product"
+import Art from "../../components/Art"
 import { Row, Col } from "react-bootstrap"
-import { listProducts } from "../../actions/productActions"
+import { listArts } from "../../actions/artActions"
 
 const MainScreen = () => {
   const dispatch = useDispatch()
 
-  const productList = useSelector((state) => state.productList)
-  const { loading, error, products } = productList
+  const artList = useSelector((state) => state.artList)
+  const { loading, error, arts } = artList
 
   useEffect(() => {
-    dispatch(listProducts())
+    dispatch(listArts())
   }, [dispatch])
 
   return (
@@ -25,9 +25,9 @@ const MainScreen = () => {
         <Message variant='danger'>{error}</Message>
       ) : (
         <Row>
-          {products.map((product) => (
-            <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-              <Product product={product} />
+          {arts.map((art) => (
+            <Col key={art._id} sm={12} md={6} lg={4} xl={3}>
+              <Art art={art} />
             </Col>
           ))}
         </Row>

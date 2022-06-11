@@ -5,17 +5,17 @@ import Loader from "../../components/Loader"
 import Message from "../../components/Message"
 import "./GalleryScreen.css"
 import { useDispatch, useSelector } from "react-redux"
-import { listProductsDetails } from "../../actions/productActions"
+import { listArtsDetails } from "../../actions/artActions"
 
 const GalleryScreen = ({ history, match }) => {
   const [qty, setQty] = useState(1)
   const dispatch = useDispatch()
 
-  const productDetails = useSelector((state) => state.productDetails)
-  const { loading, error, product } = productDetails
+  const artDetails = useSelector((state) => state.artDetails)
+  const { loading, error, art } = artDetails
 
   useEffect(() => {
-    dispatch(listProductsDetails(match.params.id))
+    dispatch(listArtsDetails(match.params.id))
   }, [dispatch, match])
 
   const addToCartHandler = () => {
@@ -35,18 +35,18 @@ const GalleryScreen = ({ history, match }) => {
         ) : (
           <Row>
             <Col md={6}>
-              <Image src={product.image} alt={product.name} fluid />
+              <Image src={art.image} alt={art.name} fluid />
             </Col>
             <Col md={3}>
               <ListGroup variant='flush'>
                 <ListGroup.Item>
-                  <h3>{product.name}</h3>
+                  <h3>{art.name}</h3>
                 </ListGroup.Item>
-                <ListGroup.Item>Price: ${product.price}</ListGroup.Item>
+                <ListGroup.Item>Price: ${art.price}</ListGroup.Item>
                 <ListGroup.Item>
-                  Description: {product.description}
+                  Description: {art.description}
                 </ListGroup.Item>
-                <ListGroup.Item>Category: {product.category}</ListGroup.Item>
+                <ListGroup.Item>Category: {art.category}</ListGroup.Item>
               </ListGroup>
             </Col>
             <Col md={3}>
@@ -56,7 +56,7 @@ const GalleryScreen = ({ history, match }) => {
                     <Row>
                       <Col>Price:</Col>
                       <Col>
-                        <strong>${product.price}</strong>
+                        <strong>${art.price}</strong>
                       </Col>
                     </Row>
                   </ListGroup.Item>
@@ -65,14 +65,14 @@ const GalleryScreen = ({ history, match }) => {
                       <Row>
                         <Col>Status:</Col>
                         <Col>
-                          {product.countInStock > 0
+                          {art.countInStock > 0
                             ? "In Stock"
                             : "Out of Stock"}
                         </Col>
                       </Row>
                     </ListGroup.Item>
 
-                    {product.countInStock > 0 && (
+                    {art.countInStock > 0 && (
                       <ListGroup.Item>
                         <Row>
                           <Col>Qty</Col>
@@ -82,7 +82,7 @@ const GalleryScreen = ({ history, match }) => {
                               value={qty}
                               onChange={(e) => setQty(e.target.value)}
                             >
-                              {[...Array(product.countInStock).keys()].map(
+                              {[...Array(art.countInStock).keys()].map(
                                 (x) => (
                                   <option key={x + 1} value={x + 1}>
                                     {x + 1}
@@ -100,7 +100,7 @@ const GalleryScreen = ({ history, match }) => {
                         onClick={addToCartHandler}
                         className='btn-block'
                         type='button'
-                        disabled={product.countInStock === 0}
+                        disabled={art.countInStock === 0}
                       >
                         Add to Cart
                       </Button>

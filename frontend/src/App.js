@@ -17,7 +17,7 @@ function App() {
           <Container>
             <Route path='/' component={MainScreen} exact />
             <Route path='/product/:id' component={GalleryScreen} />
-            <Route path='/BioScreen' component={BioScreen} />
+            {<Route path='/BioScreen' component={BioScreen}/>}
             <Route path='/Gallery' component={Gallery} />
           </Container>
         </main>

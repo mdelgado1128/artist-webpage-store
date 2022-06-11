@@ -14,5 +14,5 @@ Isthisaight is a webpage for a Oregon artist that will display a gallery of all 
 Isthisaight uses React and redux for the frontend and node and mongoDB for the backend.
 
 ## Screenshots
-![Homepage](./frontend/src/images/mikeHomePage.png)
+![Homepage](frontend/public/images/mikeHomePage.png)
 

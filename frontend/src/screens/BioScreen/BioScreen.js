@@ -1,6 +1,5 @@
 import React from "react"
 import { Image } from "react-bootstrap"
-import mainI from "../../images/me1.png"
 import "./BioScreen.css"
 
 const BioScreen = () => {
@@ -9,13 +8,6 @@ const BioScreen = () => {
       <div className='sideNav'>
         <h1>Bio</h1>
         <div className='imgDiv'>
-          <Image
-            className='imageSize'
-            src={mainI}
-            alt='mark'
-            fluid
-            roundedCircle
-          ></Image>
         </div>
 
         <div className='bioText'>
