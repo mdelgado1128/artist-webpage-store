@@ -4,9 +4,9 @@ import Header from "./components/Header"
 import { Container } from "react-bootstrap"
 import { BrowserRouter as Router, Route } from "react-router-dom"
 import Footer from "./components/Footer.js"
-import GalleryScreen from "./screens/GalleryScreen/GalleryScreen"
 import BioScreen from "./screens/BioScreen/BioScreen"
 import Gallery from "./components/Gallery/Gallery.js"
+import ArtScreen from "./screens/ArtScreen/ArtScreen";
 
 function App() {
   return (
@@ -16,8 +16,8 @@ function App() {
         <main className='py-3'>
           <Container>
             <Route path='/' component={MainScreen} exact />
-            <Route path='/product/:id' component={GalleryScreen} />
-            {<Route path='/BioScreen' component={BioScreen}/>}
+            <Route path='/art/:id' component={ArtScreen} />
+            <Route path='/BioScreen' component={BioScreen}/>
             <Route path='/Gallery' component={Gallery} />
           </Container>
         </main>
