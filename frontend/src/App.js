@@ -7,6 +7,7 @@ import Footer from "./components/Footer.js"
 import BioScreen from "./screens/BioScreen/BioScreen"
 import Gallery from "./components/Gallery/Gallery.js"
 import ArtScreen from "./screens/ArtScreen/ArtScreen";
+import LoginScreen from "./screens/LoginScreen/LoginScreen";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path='/art/:id' component={ArtScreen} />
             <Route path='/BioScreen' component={BioScreen}/>
             <Route path='/Gallery' component={Gallery} />
+            <Route path='/login' component={LoginScreen} exact/>
           </Container>
         </main>
         <Footer />
